@@ -9,11 +9,10 @@ import { Router, RouterModule } from '@angular/router';
 import { TransfersModule } from './transfers/transfers.module';
 import { TransferComponent } from './transfers/transfer/transfer.component';
 import { AuthenticacionGuard } from './authentication-guard.service';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-	declarations: [ AppComponent, UserDetailComponent ],
+	declarations: [ AppComponent ],
 	imports: [
 		BrowserModule,
 		TransfersModule,
