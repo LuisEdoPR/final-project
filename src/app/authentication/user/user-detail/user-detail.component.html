@@ -1,0 +1,37 @@
+<br><br>
+<h3>
+    <a [routerLink]="'/authentication/user'">
+        Back users list
+    </a>
+</h3>
+
+<div class="userDetail"
+     *ngIf='userDetail'>
+    <p>
+        <label class="labelUserDetail">ID: </label> {{userDetail.id}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Name: </label> {{userDetail.name}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Username: </label> {{userDetail.username}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Email: </label> {{userDetail.email}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Phone: </label> {{userDetail.phone}}
+    </p>
+    <p>
+        <label class="labelUserDetail">WebSite: </label> {{userDetail.website}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Address Street: </label> {{userDetail.address.street}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Address Suite: </label> {{userDetail.address.suite}}
+    </p>
+    <p>
+        <label class="labelUserDetail">Company Name: </label> {{userDetail.company.name}}
+    </p>
+</div>

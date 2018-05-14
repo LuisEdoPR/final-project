@@ -1,0 +1,7 @@
+<h1>User List</h1>
+<div class="divUser"
+     *ngFor="let user of users$ | async">
+    <a [routerLink]="user.id">
+         {{user.id}} - {{user.name}}
+    </a>
+</div>
