@@ -1,17 +1,17 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ResourceService } from './resource.service';
+import { DataMockService } from './data-mock.service';
 
-describe('ResourceService', () => {
+describe('DataMockService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [ ResourceService ]
+			providers: [ DataMockService ]
 		});
 	});
 
 	it(
 		'should be created',
-		inject([ ResourceService ], (service: ResourceService) => {
+		inject([ DataMockService ], (service: DataMockService) => {
 			expect(service).toBeTruthy();
 		})
 	);

@@ -1,0 +1,38 @@
+<form #myForm='ngForm'>
+    <h1>{{title}}</h1>
+
+    <br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Nombre</mat-label>
+        <input matInput
+               [(ngModel)]="name"
+               name="name"
+               [formControl]="nameFormControl"
+               placeholder="Ingrese el nombre">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+            El nombre es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Nombre del cliente</mat-label>
+        <input matInput
+               [(ngModel)]="clientName"
+               name="clientName"
+               [formControl]="clientNameFormControl"
+               placeholder="Ingrese el nombre del cliente">
+        <mat-error *ngIf="clientNameFormControl.hasError('required')">
+            El nombre del cliente es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br><br>
+
+    <button mat-raised-button
+            (click)="onClickSave()"
+            [disabled]="(nameFormControl.hasError('required') || clientNameFormControl.hasError('required'))"
+            color="primary">Guardar</button> &nbsp;
+    <button mat-raised-button
+            [routerLink]="'/project'"
+            color="basic">Cancelar</button>
+
+</form>

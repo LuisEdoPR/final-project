@@ -1,0 +1,53 @@
+<h2>Lista de Empleados</h2>
+
+<button mat-mini-fab
+        color="primary"
+        title='Agregar Empleado'
+        [routerLink]="'add'"> 
+    <mat-icon>add</mat-icon>
+</button> Agregar nuevo empleado
+<br><br>
+
+<table matSort
+       (matSortChange)="sortData($event)">
+    <tr>
+        <th mat-sort-header="id">Id</th>
+        <th mat-sort-header="name">Nombre</th>
+        <th mat-sort-header="age">Edad</th>
+        <th mat-sort-header="company">Compañia</th>
+        <th> Detalle </th>
+        <th> Editar </th>
+        <th>Eliminar</th>
+    </tr>
+
+    <tr *ngFor="let employee of employees">
+        <td>{{employee.id}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.age}}</td>
+        <td>{{employee.company}}</td>
+        <td class="td-icon">
+            <button mat-mini-fab
+                    color="primary"
+                    [routerLink]="employee.id"
+                    title='Ver Detalles del Empleado'> 
+                <mat-icon>find_in_page</mat-icon>
+            </button>
+        </td>
+        <td class="td-icon">
+            <button mat-mini-fab
+                    color="primary"
+                    title='Editar Empleado'
+                    [routerLink]="'add/'+employee.id"> 
+                <mat-icon>create</mat-icon>
+            </button>
+        </td>
+        <td class="td-icon">
+            <button mat-mini-fab
+                    color="primary"
+                    title='Eliminar Empleado'
+                    (click)='onClickDeleteEmpleado(employee.id)'> 
+                <mat-icon>delete_forever</mat-icon>
+            </button>
+        </td>
+    </tr>
+</table>

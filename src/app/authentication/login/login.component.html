@@ -1,3 +1,37 @@
-<p>
-  login works!
-</p>
+<form #myForm='ngForm'>
+    <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput
+               [(ngModel)]="user"
+               name="user"
+               #userValidation="ngModel"
+               required
+               placeholder="Ingrese el usuario">
+        <mat-icon matSuffix>face</mat-icon>
+        <mat-hint></mat-hint>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Clave</mat-label>
+        <input matInput
+               [type]="hide ? 'password' : 'text'"
+               [(ngModel)]="password"
+               name="password"
+               #passwordValidation="ngModel"
+               required
+               placeholder="Ingrese la clave">
+        <mat-icon matSuffix
+                  (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-hint></mat-hint>
+    </mat-form-field>
+    <br>
+    <div>
+        <button mat-raised-button
+                (click)="onClickLogin()"
+                [disabled]='!myForm.valid'
+                color="primary">Ingresar</button>
+    </div>
+    <br>
+    <p *ngIf="!hideError"
+       style="color: crimson">Usuario o Clave ingresados no validos</p>
+</form>

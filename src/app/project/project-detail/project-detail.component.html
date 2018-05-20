@@ -1,0 +1,40 @@
+<button mat-raised-button
+        [routerLink]="'/project'"
+        color="primary">Regresar Lista Proyectos</button>
+
+<div *ngIf='projectDetail'>
+    <p>
+        <label class="labelProjectDetail">ID: </label> {{projectDetail.id}}
+    </p>
+    <p>
+        <label class="labelProjectDetail">Name: </label> {{projectDetail.name}}
+    </p>
+    <p>
+        <label class="labelProjectDetail">Client Name: </label> {{projectDetail.clientName}}
+    </p>
+    <p>
+        <label class="labelProjectDetail">Team Size: </label> {{listEmployees.length}}
+    </p>
+
+    <div *ngIf='listEmployees.length>0'>
+        <button mat-raised-button
+                (click)='onClickShowEmployees()'
+                color="primary">{{textButton}}</button>
+
+        <div [hidden]='hideEmployees'>
+            <h2>Listado de Empleados del Proyecto {{projectDetail.name}}</h2>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+
+                <tr *ngFor="let employee of listEmployees"
+                    [routerLink]='"/user/"+employee.id'>
+                    <td>{{employee.id}}</td>
+                    <td>{{employee.name}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

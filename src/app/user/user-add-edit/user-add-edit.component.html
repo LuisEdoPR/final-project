@@ -1,0 +1,108 @@
+<form #myForm='ngForm'>
+    <h1>{{title}}</h1>
+
+    <br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Nombre</mat-label>
+        <input matInput
+               [(ngModel)]="name"
+               name="name"
+               [formControl]="nameFormControl"
+               placeholder="Ingrese el nombre">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+            El nombre es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput
+               type="date"
+               [(ngModel)]="birthday"
+               name="birthday"
+               [formControl]="birthdayFormControl"
+               placeholder="fecha">
+        <mat-error *ngIf="birthdayFormControl.hasError('required')">
+            La fecha de nacimiento es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Email</mat-label>
+        <input matInput
+               [(ngModel)]="email"
+               name="email"
+               [formControl]="emailFormControl"
+               placeholder="Ingrese el email">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Por favor ingrese un email valido
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            El email es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Telefono</mat-label>
+        <input matInput
+               type="tel"
+               [(ngModel)]="phone"
+               name="phone"
+               [formControl]="phoneFormControl"
+               placeholder="Ingrese el telefono">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="phoneFormControl.hasError('required')">
+            El telefono es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Compañia</mat-label>
+        <input matInput
+               [(ngModel)]="company"
+               name="company"
+               [formControl]="companyFormControl"
+               placeholder="Ingrese la compañia">
+        <mat-error *ngIf="companyFormControl.hasError('required')">
+            El nombre de la compañia es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="mat-form-field">
+        <mat-label>Color Favorito</mat-label>
+        <input matInput
+               class="color"
+               type="color"
+               [(ngModel)]="favoriteColor"
+               name="favoriteColor"
+               [formControl]="favoriteColorFormControl"
+               placeholder="Ingrese el color favorito">
+        <mat-hint *ngIf="favoriteColor">El color seleccionado es el : {{favoriteColor}}</mat-hint>
+        <mat-error *ngIf="favoriteColorFormControl.hasError('required')">
+            El color favorito es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+
+
+    <mat-form-field>
+        <mat-select placeholder="Seleccione Proyecto"
+                    [(ngModel)]="projectId"
+                    name="project">
+            <mat-option *ngFor="let project of projects"
+                        [value]="project.id">
+                {{project.id}} - {{project.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br><br>
+
+    <button mat-raised-button
+            (click)="onClickSave()"
+            [disabled]="(nameFormControl.hasError('required'))"
+            color="primary">Guardar</button> &nbsp;
+    <button mat-raised-button
+            [routerLink]="'/user'"
+            color="basic">Cancelar</button>
+</form>
