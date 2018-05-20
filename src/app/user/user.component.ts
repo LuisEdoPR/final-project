@@ -3,7 +3,6 @@ import { EmployeeInterface } from './model/employee-interface';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { pluck } from 'rxjs/operators';
-import { User } from './model/user.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ResourcesService } from '../shared/resource.service';

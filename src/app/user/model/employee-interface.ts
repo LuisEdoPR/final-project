@@ -7,5 +7,5 @@ export interface EmployeeInterface {
 	phone: string;
 	company: string;
 	favoriteColor: string;
-	employeeToProjectId: number;
+	projectId: number;
 }

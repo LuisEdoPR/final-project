@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { ResourcesService } from '../../shared/resource.service';
 import { EmployeeInterface } from '../../user/model/employee-interface';
 import { pluck } from 'rxjs/operators';
-import { EmployeeProjectInterface } from '../../model/employee-project.interface';
 
 @Component({
 	selector: 'app-project-detail',
@@ -31,16 +30,8 @@ export class ProjectDetailComponent implements OnInit {
 			.subscribe((project) => (this.projectDetail = project));
 
 		resourcesService
-			.getDetailProjectToEmployee('api/employeeToProject/?idProject=' + this.projectId)
-			.subscribe((list: EmployeeProjectInterface[]) =>
-				list.forEach((employee) => {
-					resourcesService
-						.getDetailResource('api/employees/' + employee.idEmployee)
-						.subscribe((employeeDetail: EmployeeInterface) =>
-							this.listEmployees.push(employeeDetail)
-						);
-				})
-			);
+			.getResource<EmployeeInterface>('api/employees/?projectId=' + this.projectId)
+			.forEach((list) => (this.listEmployees = list.slice()));
 	}
 
 	onClickShowEmployees() {

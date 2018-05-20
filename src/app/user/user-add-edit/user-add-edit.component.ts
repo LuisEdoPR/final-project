@@ -24,7 +24,6 @@ export class UserAddEditComponent implements OnInit {
 	phone: string;
 	company: string;
 	favoriteColor: string;
-	employeeToProjectId: number;
 	projectId: number;
 	projects: ProjectInterface[];
 
@@ -62,7 +61,7 @@ export class UserAddEditComponent implements OnInit {
 		const company = this.company;
 		const favoriteColor = this.favoriteColor;
 		const id = +this.employeeId;
-		const employeeToProjectId = this.employeeToProjectId;
+		const projectId = this.projectId;
 		if (this.employeeId) {
 			this.resourcesService
 				.update('api/employees', {
@@ -74,10 +73,9 @@ export class UserAddEditComponent implements OnInit {
 					phone,
 					company,
 					favoriteColor,
-					employeeToProjectId
+					projectId
 				} as EmployeeInterface)
 				.subscribe();
-			this.saveEmployeeToProject('U');
 		} else {
 			this.resourcesService
 				.add('api/employees', {
@@ -88,27 +86,11 @@ export class UserAddEditComponent implements OnInit {
 					phone,
 					company,
 					favoriteColor,
-					employeeToProjectId
+					projectId
 				} as EmployeeInterface)
 				.subscribe();
-			this.saveEmployeeToProject('A');
 		}
 		this.router.navigate([ '/user' ]);
-	}
-
-	saveEmployeeToProject(option: string) {
-		const idProject = this.projectId;
-		const idEmployee = this.employeeId;
-		const id = this.employeeToProjectId;
-		if ('U' === option) {
-			this.resourcesService
-				.add('api/employeeToProject', { id, idEmployee, idProject })
-				.subscribe();
-		} else {
-			this.resourcesService
-				.add('api/employeeToProject', { id, idEmployee, idProject })
-				.subscribe();
-		}
 	}
 
 	calculateAge() {
@@ -127,7 +109,7 @@ export class UserAddEditComponent implements OnInit {
 				this.phone = Employee.phone;
 				this.company = Employee.company;
 				this.favoriteColor = Employee.favoriteColor;
-				this.employeeToProjectId = Employee.employeeToProjectId;
+				this.projectId = Employee.projectId;
 			});
 	}
 

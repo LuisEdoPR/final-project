@@ -22,19 +22,7 @@ export class ResourcesService {
 		);
 	}
 
-	getEmployeesToProject<T>(url: string): Observable<T[]> {
-		return this.http.get<T[]>(url).pipe(
-			map((collection: T[]) => {
-				return collection;
-			})
-		);
-	}
-
 	getDetailResource<T>(url: string): Observable<T> {
-		return this.http.get<T>(url);
-	}
-
-	getDetailProjectToEmployee<T>(url: string): Observable<T> {
 		return this.http.get<T>(url);
 	}
 

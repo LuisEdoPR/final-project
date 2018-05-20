@@ -10,7 +10,7 @@ export class AppComponent {
 	static logged = false;
 
 	// para pruebas se deja en TRUE y que no pida login, para activar la seguridad se pone en FALSE;
-	static disabledSecurity = true;
+	static disabledSecurity = false;
 
 	public static setLogged(logged: boolean) {
 		this.logged = logged;
