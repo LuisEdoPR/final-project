@@ -1,12 +1,9 @@
-import { ResourcesService } from './../../shared/resource.service';
+import { ResourceService } from './../../shared/resource.service';
 import { ProjectInterface } from './../model/project-interface';
 import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AbstractControl } from '@angular/forms';
-import { ValidatorFn } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { AbstractControl, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-project-add-edit',
@@ -20,7 +17,7 @@ export class ProjectAddEditComponent implements OnInit {
 	title = 'Creación de nuevo proyecto';
 
 	constructor(
-		private resourcesService: ResourcesService,
+		private resourceService: ResourceService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {
@@ -39,7 +36,7 @@ export class ProjectAddEditComponent implements OnInit {
 		const clientName = this.clientName.trim();
 		const id = +this.projectId;
 		if (this.projectId) {
-			this.resourcesService
+			this.resourceService
 				.update('api/projects', {
 					id,
 					name,
@@ -47,7 +44,7 @@ export class ProjectAddEditComponent implements OnInit {
 				} as ProjectInterface)
 				.subscribe();
 		} else {
-			this.resourcesService
+			this.resourceService
 				.add('api/projects', { name, clientName } as ProjectInterface)
 				.subscribe();
 		}
@@ -55,7 +52,7 @@ export class ProjectAddEditComponent implements OnInit {
 	}
 
 	loadProject(projectId: string) {
-		this.resourcesService
+		this.resourceService
 			.getDetailResource<ProjectInterface>('api/projects/' + projectId)
 			.subscribe((project) => {
 				this.name = project.name;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from './../../app.component';
 import { Component, OnInit } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 		this.hideError = true;
 		if (this.genericPassword === this.password) {
 			AppComponent.setLogged(true);
-			this.router.navigate([ 'user' ]);
+			this.router.navigate([ 'employee' ]);
 		} else {
 			this.hideError = false;
 		}

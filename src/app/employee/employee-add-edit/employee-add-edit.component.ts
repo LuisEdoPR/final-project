@@ -1,21 +1,17 @@
-import { EmployeeInterface } from './../model/employee-interface';
-import { ResourcesService } from './../../shared/resource.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AbstractControl } from '@angular/forms';
-import { ValidatorFn } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { EmployeeInterface } from './../model/employee-interface';
+import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { ProjectInterface } from '../../project/model/project-interface';
-import { MatSelectModule } from '@angular/material/select';
+import { ResourceService } from './../../shared/resource.service';
 
 @Component({
-	selector: 'app-user-add-edit',
-	templateUrl: './user-add-edit.component.html',
-	styleUrls: [ './user-add-edit.component.scss' ]
+	selector: 'app-employee-add-edit',
+	templateUrl: './employee-add-edit.component.html',
+	styleUrls: [ './employee-add-edit.component.scss' ]
 })
-export class UserAddEditComponent implements OnInit {
+export class EmployeeAddEditComponent implements OnInit {
 	employeeId: string;
 	name: string;
 	age: number;
@@ -30,7 +26,7 @@ export class UserAddEditComponent implements OnInit {
 	title = 'Creación de nuevo empleado';
 
 	constructor(
-		private resourcesService: ResourcesService,
+		private resourceService: ResourceService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {
@@ -40,7 +36,7 @@ export class UserAddEditComponent implements OnInit {
 			this.loadEmployee(this.employeeId);
 		}
 
-		resourcesService
+		resourceService
 			.getResource<ProjectInterface>('api/projects')
 			.forEach((list) => (this.projects = list.slice()));
 	}
@@ -63,7 +59,7 @@ export class UserAddEditComponent implements OnInit {
 		const id = +this.employeeId;
 		const projectId = this.projectId;
 		if (this.employeeId) {
-			this.resourcesService
+			this.resourceService
 				.update('api/employees', {
 					id,
 					name,
@@ -77,7 +73,7 @@ export class UserAddEditComponent implements OnInit {
 				} as EmployeeInterface)
 				.subscribe();
 		} else {
-			this.resourcesService
+			this.resourceService
 				.add('api/employees', {
 					name,
 					age,
@@ -90,7 +86,7 @@ export class UserAddEditComponent implements OnInit {
 				} as EmployeeInterface)
 				.subscribe();
 		}
-		this.router.navigate([ '/user' ]);
+		this.router.navigate([ '/employee' ]);
 	}
 
 	calculateAge() {
@@ -99,7 +95,7 @@ export class UserAddEditComponent implements OnInit {
 	}
 
 	loadEmployee(employeeId: string) {
-		this.resourcesService
+		this.resourceService
 			.getDetailResource<EmployeeInterface>('api/employees/' + employeeId)
 			.subscribe((Employee) => {
 				this.name = Employee.name;

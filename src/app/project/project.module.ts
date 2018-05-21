@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { ProjectComponent } from './project.component';
-import { ProjectRoutingModule } from './project-routing.module';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+	MatButtonModule,
+	MatIconModule,
+	MatSortModule,
+	MatFormFieldModule,
+	MatInputModule
+} from '@angular/material';
+import { NgModule } from '@angular/core';
 import { ProjectAddEditComponent } from './project-add-edit/project-add-edit.component';
-import { MatButtonModule, MatSortModule, MatIconModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
-import { FormControl, Validators } from '@angular/forms';
+import { ProjectComponent } from './project.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectRoutingModule } from './project-routing.module';
 
 @NgModule({
 	imports: [

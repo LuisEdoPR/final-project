@@ -3,7 +3,7 @@ import { ProjectInterface } from './model/project-interface';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ResourcesService } from '../shared/resource.service';
+import { ResourceService } from '../shared/resource.service';
 import { Sort } from '@angular/material';
 
 @Component({
@@ -17,9 +17,9 @@ export class ProjectComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private http: HttpClient,
-		private resourcesService: ResourcesService
+		private resourceService: ResourceService
 	) {
-		resourcesService
+		resourceService
 			.getResource<ProjectInterface>('api/projects')
 			.forEach((list) => (this.projects = list.slice()));
 	}
@@ -27,7 +27,7 @@ export class ProjectComponent implements OnInit {
 	ngOnInit(): void {}
 
 	onClickDeleteProject(id: number) {
-		this.resourcesService.delete('api/projects/' + id).subscribe();
+		this.resourceService.delete('api/projects/' + id).subscribe();
 		this.projects = this.projects.filter((project) => project.id !== id);
 	}
 

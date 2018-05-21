@@ -1,7 +1,7 @@
-import { AppComponent } from './../app.component';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
+import { AppComponent } from '../../app.component';
 
 @Component({
 	selector: 'my-nav',

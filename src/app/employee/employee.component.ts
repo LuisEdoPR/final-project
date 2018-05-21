@@ -1,26 +1,19 @@
-import { ProjectInterface } from './../project/model/project-interface';
-import { EmployeeInterface } from './model/employee-interface';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { pluck } from 'rxjs/operators';
+import { EmployeeInterface } from './model/employee-interface';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { ResourcesService } from '../shared/resource.service';
+import { ResourceService } from '../shared/resource.service';
 import { Sort } from '@angular/material';
 
 @Component({
-	selector: 'app-user',
-	templateUrl: './user.component.html',
-	styleUrls: [ './user.component.scss' ]
+	selector: 'app-employee',
+	templateUrl: './employee.component.html',
+	styleUrls: [ './employee.component.scss' ]
 })
-export class UserComponent implements OnInit {
+export class EmployeeComponent implements OnInit {
 	employees: EmployeeInterface[];
 
-	constructor(
-		private route: ActivatedRoute,
-		private http: HttpClient,
-		private resourcesService: ResourcesService
-	) {
+	constructor(private resourcesService: ResourceService) {
 		resourcesService
 			.getResource<EmployeeInterface>('api/employees')
 			.forEach((list) => (this.employees = list.slice()));

@@ -1,11 +1,8 @@
-import { forEach } from '@angular/router/src/utils/collection';
 import { Component, OnInit } from '@angular/core';
 import { ProjectInterface } from '../model/project-interface';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { ResourcesService } from '../../shared/resource.service';
-import { EmployeeInterface } from '../../user/model/employee-interface';
-import { pluck } from 'rxjs/operators';
+import { ResourceService } from '../../shared/resource.service';
+import { EmployeeInterface } from '../../employee/model/employee-interface';
 
 @Component({
 	selector: 'app-project-detail',
@@ -18,18 +15,15 @@ export class ProjectDetailComponent implements OnInit {
 	listEmployees: EmployeeInterface[] = [];
 	hideEmployees = true;
 	textButton = 'Mostrar Empleados';
+	icon = 'expand_more';
 
-	constructor(
-		private route: ActivatedRoute,
-		private http: HttpClient,
-		resourcesService: ResourcesService
-	) {
+	constructor(private route: ActivatedRoute, resourceService: ResourceService) {
 		this.projectId = this.route.snapshot.paramMap.get('id');
-		resourcesService
+		resourceService
 			.getDetailResource<ProjectInterface>('api/projects/' + this.projectId)
 			.subscribe((project) => (this.projectDetail = project));
 
-		resourcesService
+		resourceService
 			.getResource<EmployeeInterface>('api/employees/?projectId=' + this.projectId)
 			.forEach((list) => (this.listEmployees = list.slice()));
 	}
@@ -38,15 +32,12 @@ export class ProjectDetailComponent implements OnInit {
 		this.hideEmployees = !this.hideEmployees;
 		if (this.hideEmployees) {
 			this.textButton = 'Mostrar Empleados';
+			this.icon = 'expand_more';
 		} else {
 			this.textButton = 'Ocultar Empleados';
+			this.icon = 'expand_less';
 		}
 	}
 
 	ngOnInit() {}
-}
-
-export interface employeeToProject {
-	idEmployee: number;
-	idProject: number;
 }

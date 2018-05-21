@@ -1,13 +1,11 @@
-import { ProjectInterface } from './../project/model/project-interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { tap } from 'rxjs/internal/operators/tap';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
-export class ResourcesService {
+export class ResourceService {
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 	};
@@ -46,7 +44,7 @@ export class ResourcesService {
 
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
-			console.log('${operation} failed: ${error.message}');
+			console.log(operation + ' failed: ');
 			return of(result as T);
 		};
 	}

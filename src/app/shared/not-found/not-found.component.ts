@@ -7,11 +7,16 @@ import { Router } from '@angular/router';
 	styleUrls: [ './not-found.component.scss' ]
 })
 export class NotFoundComponent implements OnInit {
+	seconds = 3;
 	constructor(private router: Router) {}
 
 	ngOnInit() {
-		setTimeout((router: Router) => {
-			this.router.navigate([ '/authentication' ]);
-		}, 3000);
+		const interval = setInterval(() => {
+			this.seconds -= 1;
+			setTimeout(() => {
+				this.router.navigate([ '/authentication' ]);
+				clearInterval(interval);
+			}, 2000);
+		}, 1000);
 	}
 }
