@@ -100,7 +100,12 @@
 
     <button mat-raised-button
             (click)="onClickSave()"
-            [disabled]="(nameFormControl.hasError('required'))"
+            [disabled]="(nameFormControl.hasError('required') || 
+                        favoriteColorFormControl.hasError('required') || 
+                        companyFormControl.hasError('required') || 
+                        phoneFormControl.hasError('required') || 
+                        emailFormControl.hasError('required') || 
+                        birthdayFormControl.hasError('required'))"
             color="primary">Guardar</button> &nbsp;
     <button mat-raised-button
             [routerLink]="'/employee'"

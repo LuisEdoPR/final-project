@@ -30,13 +30,16 @@
     <p>
         <label class="labelEmployeeDetail">Compañia: </label> {{employeeDetail.company}}
     </p>
-    <p>
+    <p *ngIf='projectId'>
         <label class="labelEmployeeDetail">Proyecto: </label> {{projectId}} - {{projectName}}
         <button mat-mini-fab
                 color="primary"
                 title='Ver Detalle Proyecto'
                 [routerLink]="'/project/'+projectId"> 
-                <mat-icon>find_in_page</mat-icon>
+            <mat-icon>find_in_page</mat-icon>
         </button>
+    </p>
+    <p *ngIf='!projectId'>
+        <label class="labelEmployeeDetail">Proyecto: </label> Indefinido
     </p>
 </div>
