@@ -16,16 +16,20 @@ export class LoginComponent implements OnInit {
 	user: string;
 	password: string;
 	hide = true;
-	usersList: UserInterface[] = [];
 
 	constructor(private router: Router, private resourceService: ResourceService) {}
 
 	onClickLogin() {
 		this.hideError = true;
 		this.resourceService
-			.getDetailResource<UserInterface>('api/users/?name=' + this.user)
+			.getDetailResource<UserInterface[]>('api/users/?name=' + this.user)
 			.subscribe((tmpUser) => {
-				if (tmpUser[0].password === this.password) {
+				if (
+					tmpUser != null &&
+					tmpUser.length > 0 &&
+					tmpUser[0].name === this.user &&
+					tmpUser[0].password === this.password
+				) {
 					AppComponent.setLogged(true);
 					this.router.navigate([ 'employee' ]);
 				} else {
