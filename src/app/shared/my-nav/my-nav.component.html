@@ -1,9 +1,9 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container"
+                       (backdropClick)="close()">
     <mat-sidenav #drawer
                  class="sidenav"
-                 fixedInViewport="true"
-                 [attr.role]="isHandset ? 'dialog' : 'navigation'"
-                 [mode]="(isHandset | async)!.matches ? 'over' : 'side'">
+                 (keydown.escape)="close()"
+                 disableClose>
         <mat-toolbar color="primary">
             <div>
                 Menu
@@ -12,7 +12,7 @@
                 <button type="button"
                         aria-label="Toggle sidenav"
                         mat-icon-button
-                        (click)="drawer.toggle()"
+                        (click)="close()"
                         *ngIf="drawer.opened">
                 <mat-icon aria-label="Side nav toggle icon">clear</mat-icon>
             </button>
@@ -21,12 +21,15 @@
         <mat-nav-list>
             <a mat-list-item
                *ngIf="getLogged()"
+               (click)="close()"
                [routerLink]="'employee'">Empleados</a>
             <a mat-list-item
                *ngIf="getLogged()"
+               (click)="close()"
                [routerLink]="'project'">Proyectos</a>
             <a mat-list-item
                *ngIf="getLogged()"
+               (click)="close()"
                [routerLink]="'authentication/logout'">Cerrar Sesion</a>
         </mat-nav-list>
     </mat-sidenav>
@@ -35,11 +38,11 @@
             <button type="button"
                     aria-label="Toggle sidenav"
                     mat-icon-button
-                    (click)="drawer.toggle()"
-                    *ngIf="!drawer.opened">
+                    (click)="drawer.open()"
+                    *ngIf="!drawer.opened && getLogged()">
                     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span>Bienvenido</span>
+            <span>HR Management</span>
         </mat-toolbar>
         <div>
             <router-outlet></router-outlet>

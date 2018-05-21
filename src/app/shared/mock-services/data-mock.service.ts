@@ -137,6 +137,17 @@ export class DataMockService implements InMemoryDbService {
 			}
 		];
 
-		return { employees, projects };
+		const users = [
+			{
+				name: 'LuisEdo',
+				password: 'todo1'
+			},
+			{
+				name: 'JuanH',
+				password: 'yuxi'
+			}
+		];
+
+		return { employees, projects, users };
 	}
 }

@@ -13,8 +13,8 @@ import { Sort } from '@angular/material';
 export class EmployeeComponent implements OnInit {
 	employees: EmployeeInterface[];
 
-	constructor(private resourcesService: ResourceService) {
-		resourcesService
+	constructor(private resourceService: ResourceService) {
+		resourceService
 			.getResource<EmployeeInterface>('api/employees')
 			.forEach((list) => (this.employees = list.slice()));
 	}
@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit {
 	ngOnInit(): void {}
 
 	onClickDeleteEmpleado(id: number) {
-		this.resourcesService.delete('api/employees/' + id).subscribe();
+		this.resourceService.delete('api/employees/' + id).subscribe();
 		this.employees = this.employees.filter((employee) => employee.id !== id);
 	}
 

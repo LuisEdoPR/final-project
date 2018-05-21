@@ -1,7 +1,9 @@
+import { UserInterface } from './../model/user-interface';
+import { ResourceService } from './../../shared/resource.service';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from './../../app.component';
 import { Component, OnInit } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule, MatTooltipModule } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,21 +13,25 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 	hideError = true;
-	genericPassword = '1234';
 	user: string;
 	password: string;
 	hide = true;
+	usersList: UserInterface[] = [];
 
-	constructor(private router: Router) {}
+	constructor(private router: Router, private resourceService: ResourceService) {}
 
 	onClickLogin() {
 		this.hideError = true;
-		if (this.genericPassword === this.password) {
-			AppComponent.setLogged(true);
-			this.router.navigate([ 'employee' ]);
-		} else {
-			this.hideError = false;
-		}
+		this.resourceService
+			.getDetailResource<UserInterface>('api/users/?name=' + this.user)
+			.subscribe((tmpUser) => {
+				if (tmpUser[0].password === this.password) {
+					AppComponent.setLogged(true);
+					this.router.navigate([ 'employee' ]);
+				} else {
+					this.hideError = false;
+				}
+			});
 	}
 
 	ngOnInit() {}
